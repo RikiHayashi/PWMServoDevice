@@ -28,7 +28,7 @@ class UDPServer(asyncore.dispatcher):
 
 	def servo(self, degree):
 		try:
-			with open("/dev/pwmwrite0", "w") as f:
+			with open("/dev/pwmservo0", "w") as f:
 				f.write(degree)
 		except:
 			sys.stderr.write("except pwmwrite0\n")
