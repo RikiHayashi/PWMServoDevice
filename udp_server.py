@@ -31,7 +31,7 @@ class UDPServer(asyncore.dispatcher):
 			with open("/dev/pwmservo0", "w") as f:
 				f.write(degree)
 		except:
-			sys.stderr.write("except pwmwrite0\n")
+			sys.stderr.write("except pwmservo0\n")
 
 if __name__ == '__main__':
 	udpserver = UDPServer() 
