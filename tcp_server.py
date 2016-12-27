@@ -5,6 +5,22 @@ import asyncore
 import socket
 import sys
 
+def servo(degree):
+	try:
+		with open("/dev/pwmservo0", "w") as f:
+			f.write(degree)
+	except:
+		sys.stderr.write("except pwmservo0\n")
+
+class ServoHandler(asyncore.dispatcher_with_send):
+	
+	def handle_read(self):
+		data = self.recv(4096)
+		if data:
+			if data == "quit":
+				raise asyncore.ExitNow("Stop Server")
+			else:
+				servo(data)
 
 class TCPServer(asyncore.dispatcher):
     def __init__(self):
@@ -18,19 +34,7 @@ class TCPServer(asyncore.dispatcher):
         pair = self.accept()
         if pair is not None:
             sock, addr = pair
-            data = sock.recv(4095)
-            self.servo(data)
-
-            if data == "quit":
-                raise asyncore.ExitNow("Stop Server")
-
-    def servo(self, degree):
-        try:
-            with open("/dev/pwmservo0", "w") as f:
-                f.write(degree)
-        except:
-            sys.stderr.write("except pwmservo0\n")
-
+            handler = ServoHandler(sock)
 
 if __name__ == '__main__':
     server = TCPServer()
