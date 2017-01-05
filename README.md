@@ -8,4 +8,5 @@ CIT ロボットシステム学 2016年度 課題1 デバイスドライバ
 * [rt-net/RaspberryPiMouse](https://github.com/rt-net/RaspberryPiMouse)
 * [WiringPi/WiringPi](https://github.com/WiringPi/WiringPi)
 
-* [動かしている動画](https://youtu.be/Q5S7VW51UNs)
+### 動かしている動画
+* [Face tracking control](https://youtu.be/Q5S7VW51UNs)
